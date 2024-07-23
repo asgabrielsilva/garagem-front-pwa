@@ -1,5 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import HomeView from '../views/HomeView.vue';
+import HomeView from "../views/HomeView.vue";
+import AcessorioView from "../views/AcessorioView.vue";
+import CategoriaView from "../views/CategoriaView.vue";
+import CorView from "../views/CorView.vue";
+import MarcaView from "../views/MarcaView.vue";
+import LoginView from "../views/LoginView.vue";
+import LogoutView from "../views/LogoutView.vue";
 import LayoutFull from '@/layouts/LayoutFull.vue';
 
 const router = createRouter({
@@ -11,26 +17,40 @@ const router = createRouter({
       component: LayoutFull,
       children: [
         {
-          path: '',
-          name: 'Home',
+          path: "/",
+          name: "home",
           component: HomeView,
         },
         {
-          path: '/produtos/adicionar',
-          name: 'ProductAdd',
-          component: () => import('@/views/ProductAdd.vue'),
+          path: "/acessorios",
+          name: "acessorios",
+          component: AcessorioView,
         },
         {
-          path: '/produtos/categoria/:category_id',
-          name: 'Category',
-          component: () => import('@/views/CategoryView.vue'),
-          props: true,
+          path: "/categorias",
+          name: "categorias",
+          component: CategoriaView,
         },
         {
-          path: '/login',
-          name: 'Login',
-          component: () => import('@/views/LoginView.vue'),
+          path: "/cores",
+          name: "cores",
+          component: CorView,
         },
+        {
+          path: "/marcas",
+          name: "marcas",
+          component: MarcaView,
+        },
+        {
+          path: "/login",
+          name: "login",
+          component: LoginView,
+        },
+        {
+          path: "/logout",
+          name: "logout",
+          component: LogoutView,
+        }
       ],
     },
   ],
