@@ -1,5 +1,9 @@
 <script setup>
 import LogoTitle from '@/components/templates/LogoTitle.vue';
+
+import { useAuthStore } from '@/stores/auth';
+
+const authStore = useAuthStore();
 </script>
 <template>
   <div class="logo_and_menu">
@@ -9,18 +13,31 @@ import LogoTitle from '@/components/templates/LogoTitle.vue';
       <router-link to="/">
         <i class="icon mdi mdi-home-outline" /> Home
       </router-link>
+      <div v-if="authStore.loggedIn">
+    <router-link  to="/logout">
+    <i class="icon mdi mdi-account" /> Logout
+    </router-link>
+      {{ authStore.user.email }}
+    </div>
+    <router-link v-else to="/login">
+    <i class="icon mdi mdi-account" /> Login
+    </router-link>
     </div>
     <div class="divider" />
     <div class="menu">
-      <router-link to="/">
-        <i class="icon mdi mdi-account-circle-outline" /> Perfil
+      <router-link to="/acessorios">
+        Acessorios
       </router-link>
-      <router-link to="/">
-        <i class="icon mdi mdi-cart-outline" /> Carrinho
+      <router-link to="/categorias">
+         Categorias
       </router-link>
-      <router-link to="/login">
-        <i class="icon mdi mdi-account" /> Login
+      <router-link to="/cores">
+         Cores
       </router-link>
+      <router-link to="/marcas">
+         Marcas
+      </router-link>
+      
     </div>
   </div>
   <logo-title />

@@ -1,6 +1,30 @@
 <script setup>
 import { ref, reactive, onMounted } from "vue";
 import CategoriasApi from "@/api/categorias";
+import { PassageUser } from '@passageidentity/passage-elements/passage-user';
+import { useAuthStore } from '@/stores/auth';
+
+const authStore = useAuthStore();
+
+const getUserInfo = async () => {
+  try {
+    const authToken = localStorage.getItem('psg_auth_token');
+    const passageUser = new PassageUser(authToken);
+    const user = await passageUser.userInfo(authToken);
+    if (user) {
+      await authStore.setToken(authToken);
+    } else {
+      authStore.unsetToken();
+    }
+  } catch (error) {
+    authStore.unsetToken();
+  }
+};
+
+onMounted(() => {
+  getUserInfo();
+});
+
 const categoriasApi = new CategoriasApi();
 
 const defaultCategoria = { id: null, descricao: "" };
